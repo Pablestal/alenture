@@ -189,6 +189,16 @@ Spanish will be added later by copying the structure.
 3. **Keys name meaning, not text.** `places.form.saveButton`, never
    `places.savePlace`. Nested by feature and context.
 
+   A key beginning `__` is not a string the UI renders. It is a note to whoever
+   translates the file, and it lives in the file because a translator will never
+   read a comment in a component. `map.attribution.__note` is the first: it says
+   that the placeholders in `attribution.credit` are the basemap's three credit
+   links and that a translation has to keep all three, because a file that can
+   reorder placeholders can also drop one. JSON has no comments, so the note has
+   to be a key, and the `__` prefix is what marks it as a key nothing renders —
+   it is still typed into `resources`, and nothing calls it. Any future
+   non-string key takes this shape rather than inventing another.
+
 4. **Plurals always use i18next `_one` / `_other` keys.** Never concatenate a
    number with a string.
 
@@ -409,14 +419,22 @@ and every tool that inspects it says otherwise.
   looking finds the file it should have been in and concludes it was never set.
   `.env.example` is the checked-in template; both real files are git-ignored.
 - A variable that can disagree with another one is required and has no default.
-  `shared/lib/env.ts` names those, and a missing one stops the app at startup
-  rather than once per use. The two geocoding endpoints are the case that set
-  the rule: default either of them and a setup that points one at a self-hosted
-  Photon keeps talking to the public instance with the other, which looks
-  exactly like the geocoder having nothing to say. `VITE_MAP_STYLE_URL` is the
-  remaining default, and defensibly so — it has no partner to fall out of step
-  with, and a style that fails to load is a blank map, which nobody mistakes for
-  a working one.
+  `shared/lib/env.ts` names those and throws at startup, so the app does not
+  render at all rather than failing once per use. That refusal is the intended
+  behaviour, not a rough edge to smooth off.
+
+  Both pairs it names are the same failure. The geocoding endpoints set the
+  rule: default either one and a setup that points the other at a self-hosted
+  Photon keeps talking to the public instance, which looks exactly like the
+  geocoder having nothing to say. The two map style URLs are the clearer case,
+  because tiles are fetched on every pan — point `VITE_MAP_STYLE_DARK_URL` at
+  your own tileserver, leave `VITE_MAP_STYLE_LIGHT_URL` to a default, and half
+  the basemap switch quietly leaves your instance for somebody else's.
+
+  So nothing has a default now. A single style URL once did, defensibly: it had
+  no partner to fall out of step with, and a style that fails to load is a blank
+  map, which nobody mistakes for a working one. The second style is what made it
+  a pair, and the exception became the rule's plainest example.
 - Don't create a README, tests or CI unless asked.
 - Schema changes go through a migration and `npx --no-install supabase db push`.
   Never the SQL Editor: it leaves the schema right and the migration history
