@@ -1,6 +1,7 @@
 import { AccountButton } from '@/features/auth/ui/AccountButton'
 import { LayersContainer } from '@/features/layers/ui/LayersContainer'
 import { CenterPin } from '@/features/map/ui/CenterPin'
+import { MapAttribution } from '@/features/map/ui/MapAttribution'
 import { PlacementConfirmBar } from '@/features/map/ui/PlacementConfirmBar'
 import { PlacementTopBar } from '@/features/map/ui/PlacementTopBar'
 import { PlaceDetailContainer } from '@/features/places/ui/PlaceDetailContainer'
@@ -15,22 +16,6 @@ import { useIsFinePointer } from '@/shared/lib/useIsFinePointer'
 
 import { AddPlaceButton } from './AddPlaceButton'
 import { BrandCard } from './BrandCard'
-
-/**
- * The strip the bottom-left column leaves clear below itself for MapLibre's
- * attribution control.
- *
- * The control lives at the map's own bottom-left corner and cannot move: the
- * other three corners are the brand card, the account button and the add
- * button. It knows nothing about this layer's insets — its CSS puts a 24px
- * compact control on a 10px margin, so it occupies the bottom 34px of the
- * viewport flat. This layer's own inset is already 16px on a phone and 24px
- * from `md` up, so 20px clears it on both.
- *
- * The ODbL requires the attribution. Covering it is not an option, which is why
- * this is a reserved strip rather than a guess at whether anything overlaps.
- */
-const ATTRIBUTION_STRIP = '20px'
 
 /**
  * The floating layer over the map. It owns the edge insets (16px on mobile,
@@ -64,10 +49,7 @@ export function MapChrome() {
     screen — it grew from a card of filters into an index of every place.
   */
   const bottomLeft = (className = 'flex') => (
-    <div
-      className={`${className} min-h-0 flex-col justify-end gap-2 self-stretch`}
-      style={{ marginBottom: ATTRIBUTION_STRIP }}
-    >
+    <div className={`${className} min-h-0 flex-col justify-end gap-2 self-stretch`}>
       <PlacesErrorPanel />
       <EmptyPlacesHint />
       <LayersContainer />
@@ -76,7 +58,7 @@ export function MapChrome() {
 
   return (
     <div
-      className="pointer-events-none absolute inset-0 flex flex-col justify-between [--chrome-inset:16px] md:[--chrome-inset:24px]"
+      className="pointer-events-none absolute inset-0 flex flex-col justify-between gap-2 [--chrome-inset:16px] md:[--chrome-inset:24px]"
       style={{
         paddingTop: 'calc(var(--chrome-inset) + env(safe-area-inset-top))',
         paddingRight: 'calc(var(--chrome-inset) + env(safe-area-inset-right))',
@@ -128,7 +110,9 @@ export function MapChrome() {
           Bottom centre on a coarse pointer, right-hand column on a fine one —
           where the form's panel lands, so the bar does not jump between them.
         */
-        <div className={`flex ${isFinePointer ? 'justify-end' : 'justify-center'}`}>
+        <div
+          className={`flex min-h-0 flex-1 items-end ${isFinePointer ? 'justify-end' : 'justify-center'}`}
+        >
           <PlacementConfirmBar />
         </div>
       ) : isDetailOpen ? (
@@ -181,6 +165,25 @@ export function MapChrome() {
           <AddPlaceButton />
         </div>
       )}
+
+      {/*
+        The basemap credit, outside the mode branches on purpose.
+
+        Every branch above drops the bottom-left column for its own reasons —
+        placement and editing replace the row, and a detail panel on a coarse
+        pointer takes the whole bottom of the screen — so a credit living in
+        that column would disappear for the duration of all three. MapLibre's
+        own control used to survive them by sitting on the map rather than in
+        this layer; now that the credit is ours, it survives them by sitting
+        outside the branch. Under-attributing is the one failure this must not
+        produce, and a mode is not a reason to stop crediting the tiles.
+
+        Last child, and every branch above it grows, so it lands on the floor
+        under whatever the mode put there. That is what replaced the reserved
+        20px strip: the credit is in this layer now, so it takes part in the
+        layout instead of being dodged by it.
+      */}
+      <MapAttribution />
     </div>
   )
 }

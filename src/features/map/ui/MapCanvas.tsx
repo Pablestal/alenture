@@ -1,7 +1,7 @@
 import 'maplibre-gl/dist/maplibre-gl.css'
 
 import { useCallback, useEffect, useRef } from 'react'
-import { AttributionControl, Map } from 'react-map-gl/maplibre'
+import { Map } from 'react-map-gl/maplibre'
 import type { MapLayerMouseEvent, MapRef } from 'react-map-gl/maplibre'
 import { useTranslation } from 'react-i18next'
 
@@ -169,7 +169,13 @@ export function MapCanvas() {
       dragRotate={false}
       touchPitch={false}
       pitchWithRotate={false}
-      // Our own controls come later; MapLibre's natives stay off.
+      /*
+        MapLibre's native controls stay off, and this one has to stay off for a
+        reason beyond styling: the native attribution control is the only thing
+        that calls the sanitizer GHSA-jrc7-96c5-q579 reports as bypassable. The
+        ODbL credit is ours now and lives in the chrome layer — see
+        `MapAttribution`, which carries the detail.
+      */
       attributionControl={false}
       // Kept for the whole fine-pointer session, not just before the first click:
       // a further click re-places the pin, so the affordance is still true.
@@ -177,15 +183,6 @@ export function MapCanvas() {
       onClick={handleClick}
       onMoveEnd={handleMoveEnd}
     >
-      {/*
-        TODO: this is MapLibre's own attribution control — its text does not go
-        through i18next and its styling is MapLibre CSS, not Tailwind. A later
-        milestone decides whether to restyle it or replace it with our own.
-        It must never simply be removed: ODbL requires the attribution.
-        Sits bottom-left so it does not collide with the add button.
-      */}
-      <AttributionControl compact position="bottom-left" />
-
       <PlaceMarkers />
 
       {/*

@@ -72,6 +72,17 @@ over-simple, this is usually why.
 Tiles: OpenFreeMap (`https://tiles.openfreemap.org/styles/liberty`), no API key
 required. The style URL lives in an env var, never hardcoded in a component.
 
+The basemap credit is static text in `MapAttribution`, not MapLibre's
+`AttributionControl`. The control was removed rather than restyled because its
+one DOM write is the single call site of the sanitizer in
+GHSA-jrc7-96c5-q579, and static text accepts no remote HTML at all — the fix is
+not a better sanitizer. The consequence is that the wording is ours to keep
+true: it was read from the `attribution` field of
+`https://tiles.openfreemap.org/planet`, the TileJSON both styles load. Re-read
+that field whenever a basemap is added or a source swapped, and update the
+component. It cannot notice for itself that it has gone stale, and
+under-attributing is the one failure it must not produce.
+
 Geocoding: Photon (`https://photon.komoot.io/api`), also key-free, also in an
 env var. It is a free service with no availability guarantee: the repository
 throttles itself to one request per second, and a failed search leaves the map
@@ -205,7 +216,13 @@ Spanish will be added later by copying the structure.
 - Relative paths in Vite (`base: './'`), required inside a WebView.
 - Heights in `dvh`, never `vh`.
 - Respect `env(safe-area-inset-*)` in all floating chrome.
-- Minimum touch target 44x44px.
+- Minimum touch target 44x44px. One named exception: the basemap credit in
+  `MapAttribution`, whose links are about 30px. The rule protects controls the
+  user is trying to land on, and nobody goes hunting for a credit — at 44px it
+  would be the largest thing along the map's bottom edge, which is the opposite
+  of what a credit should be. This is a waiver, not a precedent: anything the
+  user is meant to aim at still gets 44px, and a second exception needs the
+  same kind of argument written in the same place.
 - No interaction may depend on hover alone.
 - UUIDs are generated client-side with `crypto.randomUUID()`, never by the
   database, so offline work stays possible later.

@@ -81,9 +81,9 @@ export function SearchResultsPanel({
       )}
 
       {/*
-        Photon serves OpenStreetMap data under ODbL. The map's attribution
-        control covers the tiles and says nothing about these results, so the
-        credit belongs here, wherever the results are shown.
+        Photon serves OpenStreetMap data under ODbL. The map's own credit
+        covers the tiles and says nothing about these results, so the credit
+        belongs here, wherever the results are shown.
       */}
       <p className="border-t border-border/60 px-4 py-2 text-[11px] text-text-muted">
         {t('attribution')}

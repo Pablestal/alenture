@@ -2,6 +2,10 @@
   "canvas": {
     "label": "Map of your places"
   },
+  "attribution": {
+    "__note": "Translator note, not shown in the app. <0/>, <1/> and <2/> are the three credit links, in source order OpenFreeMap, OpenMapTiles and OpenStreetMap. Their text lives in the component because they are product names and are not translated. Reorder the placeholders and change the words around them as the language needs, but keep all three: the basemap tiles are served under the ODbL, and a translation that drops a link under-attributes them.",
+    "credit": "<0/> <1/> Data from <2/>"
+  },
   "addPlace": {
     "label": "Add a place"
   },
