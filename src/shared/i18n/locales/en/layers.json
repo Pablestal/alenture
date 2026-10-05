@@ -1,0 +1,56 @@
+{
+  "title": "Layers",
+  "open": "Layers and filters",
+  "sheetHandle": "Drag down to close layers",
+  "index": {
+    "title": "Layers",
+    "unassigned": "Unassigned",
+    "empty": "Layers are your own way of grouping places — “Towns in Galicia”, “Houses”, “International”. Make one and file places into it.",
+    "layerEmpty": "Nothing filed here yet.",
+    "toggle": "Show {{name}} on the map"
+  },
+  "manage": {
+    "action": "Manage",
+    "done": "Done",
+    "create": "New layer",
+    "createSubmit": "Create",
+    "rename": "Rename {{name}}",
+    "renameSubmit": "Rename",
+    "moveUp": "Move {{name}} up",
+    "moveDown": "Move {{name}} down",
+    "delete": "Delete {{name}}",
+    "nameLabel": "Layer name",
+    "namePlaceholder": "What do these have in common?",
+    "cancel": "Cancel",
+    "saving": "Saving…",
+    "deletePrompt": {
+      "title": "Delete this layer?",
+      "message": "“{{name}}” will be removed. Its places stay on your map — they just won’t be filed anywhere.",
+      "cancel": "Keep it",
+      "confirm": "Delete layer"
+    },
+    "errors": {
+      "nameRequired": "Give this layer a name.",
+      "nameTooLong": "That name is too long. Keep it under 100 characters.",
+      "failed": "That didn’t work. Nothing was changed.",
+      "failedUnauthenticated": "Your session has expired. Sign in again to change your layers."
+    }
+  },
+  "filters": {
+    "title": "Filters",
+    "active": "Some places are filtered out"
+  },
+  "years": {
+    "title": "Years",
+    "undated": "No date"
+  },
+  "countries": {
+    "title": "Countries",
+    "unknown": "No country"
+  },
+  "style": {
+    "title": "Map style",
+    "dark": "Dark",
+    "light": "Light"
+  }
+}

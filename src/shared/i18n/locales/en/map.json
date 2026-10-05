@@ -1,0 +1,18 @@
+{
+  "canvas": {
+    "label": "Map of your places"
+  },
+  "addPlace": {
+    "label": "Add a place"
+  },
+  "placement": {
+    "instruction": {
+      "fine": "Click the map or drag the pin",
+      "coarse": "Move the map to position the pin"
+    },
+    "coordinates": "Coordinates",
+    "awaitingPoint": "Click the map to place a pin",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  }
+}

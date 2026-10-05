@@ -1,0 +1,11 @@
+{
+  "app": {
+    "name": "ALENTURE"
+  },
+  "brand": {
+    "places_one": "{{count, number}} place",
+    "places_other": "{{count, number}} places",
+    "countries_one": "{{count, number}} country",
+    "countries_other": "{{count, number}} countries"
+  }
+}

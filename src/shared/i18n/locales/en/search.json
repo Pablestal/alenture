@@ -1,0 +1,16 @@
+{
+  "open": "Search for a city",
+  "close": "Close search",
+  "field": {
+    "label": "Search for a city",
+    "placeholder": "Search for a city",
+    "clear": "Clear search"
+  },
+  "results": {
+    "label": "Search results",
+    "searching": "Searching…",
+    "empty": "No cities match that.",
+    "error": "We couldn't search just now. The map still works."
+  },
+  "attribution": "Results from Photon · © OpenStreetMap contributors, ODbL"
+}

@@ -1,0 +1,98 @@
+{
+  "emptyHint": {
+    "message": "No places yet. Add your first one.",
+    "dismiss": "Dismiss"
+  },
+  "error": {
+    "loadFailed": "Your places could not be loaded.",
+    "retry": "Try again"
+  },
+  "form": {
+    "title": "New place",
+    "close": "Close the form",
+    "sheetHandle": "Drag to close",
+    "save": "Save place",
+    "saving": "Saving…",
+    "name": {
+      "label": "City",
+      "placeholder": "Which city?",
+      "detecting": "Looking up what’s here…",
+      "detected": "Detected: {{place}}",
+      "suggestion": "This looks like {{place}}.",
+      "suggestionAccept": "Use that name",
+      "suggestionDismiss": "Keep mine"
+    },
+    "layer": {
+      "label": "Layer",
+      "hint": "Your own grouping. Optional.",
+      "none": "No layer",
+      "empty": "No layers yet — make one in the layers panel."
+    },
+    "date": {
+      "label": "Visit date",
+      "hint": "Leave empty if you don’t remember when."
+    },
+    "notes": {
+      "label": "Notes",
+      "placeholder": "Anything worth remembering about this visit.",
+      "counter": "{{length}} / {{max}}"
+    },
+    "coordinates": {
+      "label": "Coordinates"
+    },
+    "discard": {
+      "title": "Discard this place?",
+      "message": "You’ve started filling this in. Closing now loses it.",
+      "keep": "Keep editing",
+      "confirm": "Discard"
+    },
+    "errors": {
+      "nameRequired": "Give this place a name.",
+      "nameTooLong": "That name is too long. Keep it under 200 characters.",
+      "notesTooLong": "These notes are too long. Keep them under 2000 characters.",
+      "dateInvalid": "That date doesn't exist.",
+      "coordinatesInvalid": "That point is not on Earth. Move the pin and try again.",
+      "saveFailed": "That place could not be saved. Nothing was recorded.",
+      "saveUnauthenticated": "Your session has expired. Sign in again to save this place."
+    }
+  },
+  "detail": {
+    "close": "Close the details",
+    "sheetHandle": "Drag to close",
+    "date": {
+      "unknown": "No date recorded"
+    },
+    "notes": {
+      "empty": "Nothing written down"
+    },
+    "delete": {
+      "action": "Delete place",
+      "title": "Delete this place?",
+      "message": "{{name}} will be removed from your map.",
+      "cancel": "Keep it",
+      "confirm": "Delete",
+      "failed": "That place could not be deleted. It is still on your map.",
+      "failedUnauthenticated": "Your session has expired. Sign in again to delete this place."
+    },
+    "edit": {
+      "action": "Edit",
+      "close": "Close without saving",
+      "save": "Save changes",
+      "saving": "Saving…",
+      "cancel": "Cancel",
+      "dateFailed": "The date could not be saved. Everything else was.",
+      "discard": {
+        "title": "Discard your changes?",
+        "message": "You have unsaved changes. Closing now loses them.",
+        "keep": "Keep editing",
+        "confirm": "Discard"
+      }
+    },
+    "move": {
+      "action": "Move pin",
+      "dragHint": "Drag the pin on the map to move it.",
+      "hint": "Drag the pin, then press Done.",
+      "done": "Done"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@theme {
+  --color-surface: #250902; /* panel background, used at 85% */
+  --color-surface-raised: #38040e;
+  --color-border: #640d14;
+  --color-text: #fefae0;
+  --color-text-muted: #d8c3b5;
+  --color-accent: #e9a23b;
+  --color-accent-pressed: #bc6c25;
+  --color-danger: #e5484d;
+
+  --font-display: "Space Grotesk", sans-serif; /* headings and figures */
+  --font-sans: "Inter", sans-serif;
+
+  --radius-panel: 16px;
+}

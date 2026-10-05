@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+/* Minimal reset. The map is full-bleed, so the document itself never scrolls. */
+html,
+body,
+#root {
+  height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+}
+
+body {
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* Figures (counters, dates, coordinates) always line up. */
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
