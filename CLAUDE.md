@@ -322,10 +322,16 @@ All markers render identically. Population will size them once geocoding lands.
 
 ## Database
 
-Supabase with PostGIS. The schema is applied; the three files in
+Supabase with PostGIS. The schema is applied; the five files in
 `supabase/migrations/` are its history. The first two still mention
 `place_categories` and `places.category`, which the third drops — read them in
 order, not individually.
+
+`20260821090000_initial_schema.sql` has Spanish comments. It predates the
+English rule above and is left exactly as it was run: a migration is a record
+of what was applied, and rewriting an applied one to match a later convention
+is worse than one historical file reading differently. Read it as history, not
+as drift. Every migration after it is English, and new ones are too.
 
 - `places` — a city. Read `lat`/`lng`; `geom` is **generated**, so use it for
   spatial queries and never write it — Postgres rejects any insert or update
@@ -362,7 +368,7 @@ creates them.
 Regenerate types (PowerShell):
 
 ```powershell
-npx supabase gen types typescript --linked | Out-File -Encoding utf8 src/types/database.ts
+npx --no-install supabase gen types typescript --linked | Out-File -Encoding utf8 src/types/database.ts
 ```
 
 Not `>`. PowerShell's redirection writes UTF-16, and the file then reads as
@@ -395,9 +401,16 @@ and every tool that inspects it says otherwise.
   with, and a style that fails to load is a blank map, which nobody mistakes for
   a working one.
 - Don't create a README, tests or CI unless asked.
-- Schema changes go through a migration and `supabase db push`. Never the SQL
-  Editor: it leaves the schema right and the migration history wrong, and the
-  two then disagree silently.
+- Schema changes go through a migration and `npx --no-install supabase db push`.
+  Never the SQL Editor: it leaves the schema right and the migration history
+  wrong, and the two then disagree silently.
+- The Supabase CLI is pinned to `2.116.0` in `devDependencies`, and every
+  command here calls it through `npx --no-install` so it resolves to that copy.
+  Bare `npx supabase` fetches the latest instead, and 2.119.0 is broken: it
+  fails at the temp-login-role step with `(EAUTHQUERY) unsupported or invalid
+  secret format` and suggests setting `SUPABASE_DB_PASSWORD` — which sends you
+  hunting a credential that was never the problem. `--no-install` turns a
+  missing pin into an error rather than a silent upgrade to the broken version.
 - A green `tsc` says nothing about whether `src/types/database.ts` matches the
   database. An added column is optional on `Insert`, and a removed one breaks
   nothing if no code reads it, so a stale file passes in silence. After any

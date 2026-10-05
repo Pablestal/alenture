@@ -16,3 +16,7 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+# Claude Code: per-machine permission allowlist, not shared.
+# Also covered by a global ignore on one machine; this makes it hold everywhere.
+.claude/settings.local.json

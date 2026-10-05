@@ -10,7 +10,8 @@ Check that three things say the same thing, and report where they diverge:
 
 Steps:
 
-- `npx supabase migration list` — every migration should appear in both columns
+- `npx --no-install supabase migration list` — every migration should appear in
+  both columns (pinned CLI; see CLAUDE.md on why bare `npx supabase` breaks)
 - Confirm `src/types/database.ts` is CLI-generated, not hand-written: check its
   encoding (UTF-8, not UTF-16), its formatting, and its mtime
 - Grep the file **on disk** for the columns the most recent migration added or
